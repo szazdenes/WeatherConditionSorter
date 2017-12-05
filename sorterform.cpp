@@ -22,6 +22,7 @@ SorterForm::~SorterForm()
 
 void SorterForm::on_pushButton_clicked()
 {
+    weatherDataMap.clear();
     fileName = QFileDialog::getOpenFileName(this, "Open file", "../../", "*.dat");
     loadData(fileName);
     selectData(weatherDataMap);
