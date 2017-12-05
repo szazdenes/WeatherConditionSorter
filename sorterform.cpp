@@ -64,26 +64,27 @@ void SorterForm::selectData(QMap<QString, QList<QPair<double, double> > > dataMa
                 return;
             }
             QTextStream outStream(&outFile);
-
+            outStream << "#time/wind(" + ui->windMinDoubleSpinBox->text() + "-" + ui->windMaxDoubleSpinBox->text() + "," + ui->windRangeDoubleSpinBox->text() + ")\n";
+            QMap<QString, QList<int> > resultMap;
             for(double j = ui->windMinDoubleSpinBox->value(); j <= ui->windMaxDoubleSpinBox->value(); j += ui->windRangeDoubleSpinBox->value()){
-                QMap<QString, int> resultMap;
                 foreach(QString currentKey, dataMap.keys()){
+                    int num = 0;
                     for(int k = 0; k < dataMap[currentKey].size(); k++){
-                        if(dataMap[currentKey].at(k).first > i && dataMap[currentKey].at(k).second < j){
-                            resultMap[currentKey]++;
-                        }
+                        if(dataMap[currentKey].at(k).first > i && dataMap[currentKey].at(k).second < j)
+                            num++;
                     }
+                    resultMap[currentKey].append(num);
                 }
-
-                outStream << "#time/wind\n";
-                outStream << QString::number(j) + "\t";
-                QStringList keyList = resultMap.keys();
-                qSort(keyList.begin(), keyList.end());
-                foreach(QString currKey, keyList){
-                    if(currKey != keyList.last())
-                        outStream << QString::number(resultMap[currKey]) + "\t";
+            }
+            QStringList keyList = resultMap.keys();
+            qSort(keyList.begin(), keyList.end());
+            foreach(QString currKey, keyList){
+                outStream << currKey + "\t";
+                for(int q = 0; q < resultMap[currKey].size(); q++){
+                    if(q < resultMap[currKey].size()-1)
+                        outStream << QString::number(resultMap[currKey].at(q)) + "\t";
                     else
-                        outStream << QString::number(resultMap[currKey]) + "\n";
+                        outStream << QString::number(resultMap[currKey].at(q)) + "\n";
                 }
             }
             outFile.close();
