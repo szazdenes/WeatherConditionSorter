@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 
+
 namespace Ui {
 class SorterForm;
 }
@@ -30,6 +31,7 @@ private:
 
     void loadData(QString fileName);
     void selectData(QMap<QString, QList<QPair<double, double> > > dataMap); //first: air temp, second: wind
+    void plotWithGnuPlot(QString plotFile);
 };
 
 #endif // SORTERFORM_H
