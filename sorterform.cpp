@@ -98,7 +98,16 @@ void SorterForm::plotWithGnuPlot(QString plotFile)
     if(!plotFile.isEmpty()){
         QString outName = plotFile;
         outName.remove(".csv").append(".ps");
-        QString com = QString("reset;set terminal postscript landscape enhanced color font 'Times-Roman,14';set output '%1';filename = '%2';set style line 1 lc rgb 'black' pt 7 ps 1.0 lt 1 lw 1.0;set style line 2 lc rgb 'black' pt 7 ps 1.0 lt 2 lw 1.0;set style line 3 lc rgb 'grey' pt 7 ps 1.0 lt 1 lw 1.0;set style line 4 lc rgb 'grey' pt 7 ps 1.0 lt 2 lw 1.0;set style line 5 lc rgb 'red' pt 7 ps 1.0 lt 1 lw 1.0;set style line 6 lc rgb 'red' pt 7 ps 1.0 lt 2 lw 1.0;set style line 7 lc rgb 'green' pt 7 ps 1.0 lt 1 lw 1.0;set style line 8 lc rgb 'green' pt 7 ps 1.0 lt 2 lw 1.0;set style line 9 lc rgb 'blue' pt 7 ps 1.0 lt 1 lw 1.0;set style line 10 lc rgb 'blue' pt 7 ps 1.0 lt 2 lw 1.0;set xdata time;set timefmt '%H:%M:%S';set xrange ['00:00:00':'23:55:00'];set yrange [0:23];set xlabel 'time';set ylabel 'number of occurrence';set key left top;plot filename u 1:2 w l ls 1 title 'wind 1 km/h', '' u 1:3 w l ls 2 title 'wind 2 km/h', '' u 1:4 w l ls 3 title 'wind 3 km/h', '' u 1:5 w l ls 4 title 'wind 4 km/h', '' u 1:6 w l ls 5 title 'wind 5 km/h', '' u 1:7 w l ls 6 title 'wind 6 km/h', '' u 1:8 w l ls 7 title 'wind 7 km/h', '' u 1:9 w l ls 8 title 'wind 8 km/h', '' u 1:10 w l ls 9 title 'wind 9 km/h', '' u 1:11 w l ls 10 title 'wind 10 km/h';").arg(outName).arg(plotFile);
+        QString com = QString("reset;set terminal postscript landscape enhanced color font 'Times-Roman,14';set output '%1';filename = '%2';"
+                              "set style line 1 lc rgb 'black' pt 7 ps 1.0 lt 1 lw 1.0;set style line 2 lc rgb 'black' pt 7 ps 1.0 lt 2 lw 1.0;"
+                              "set style line 3 lc rgb 'grey' pt 7 ps 1.0 lt 1 lw 1.0;set style line 4 lc rgb 'grey' pt 7 ps 1.0 lt 2 lw 1.0;"
+                              "set style line 5 lc rgb 'red' pt 7 ps 1.0 lt 1 lw 1.0;set style line 6 lc rgb 'red' pt 7 ps 1.0 lt 2 lw 1.0;"
+                              "set style line 7 lc rgb 'green' pt 7 ps 1.0 lt 1 lw 1.0;set style line 8 lc rgb 'green' pt 7 ps 1.0 lt 2 lw 1.0;"
+                              "set style line 9 lc rgb 'blue' pt 7 ps 1.0 lt 1 lw 1.0;set style line 10 lc rgb 'blue' pt 7 ps 1.0 lt 2 lw 1.0;"
+                              "set xdata time;set timefmt '%H:%M:%S';set xrange ['00:00:00':'23:55:00'];set yrange [0:23];set xlabel 'time';"
+                              "set ylabel 'number of occurrence';set key left top;plot filename u 1:2 w l ls 1 title 'wind 1 km/h', '' u 1:3 w l ls 2 title 'wind 2 km/h',"
+                              " '' u 1:4 w l ls 3 title 'wind 3 km/h', '' u 1:5 w l ls 4 title 'wind 4 km/h', '' u 1:6 w l ls 5 title 'wind 5 km/h', '' u 1:7 w l ls 6 title 'wind 6 km/h',"
+                              " '' u 1:8 w l ls 7 title 'wind 7 km/h', '' u 1:9 w l ls 8 title 'wind 8 km/h', '' u 1:10 w l ls 9 title 'wind 9 km/h', '' u 1:11 w l ls 10 title 'wind 10 km/h';").arg(outName).arg(plotFile);
         Gnuplot gp;
         gp.cmd(com.toStdString());
         QApplication::processEvents();
